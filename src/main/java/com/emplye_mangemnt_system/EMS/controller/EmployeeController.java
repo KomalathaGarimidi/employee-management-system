@@ -16,7 +16,8 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping
+    //creating new employee
+    @PostMapping("/create")
     public ResponseEntity<Employee> creatingEmployee(@RequestBody Employee employee){
         //check whether the employee is already  present or not before creating
         if(findEmployeById(employee.getEmpId())){
@@ -26,16 +27,20 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
+    //find employee using empid
     @GetMapping("/{empid}")
     public boolean findEmployeById(@PathVariable int empid){
         return employeeService.findEmployeById(empid);
     }
 
+    //inserting batch of files
     @PostMapping("/list")
     public void batchInsert(@RequestBody List<Employee> employeeList){
         employeeService.batchInsert(employeeList);
     }
 
+
+    //updating the existing employess
     @PostMapping("/id")
     public Employee updateEmp(@RequestBody Employee employee){
         System.out.println("updateemp() from controller");
@@ -44,7 +49,7 @@ public class EmployeeController {
     }
 
 
-    
+    //delete the existing employes
     @GetMapping("/delete/{rollno}")
     public boolean deleteEmp(@PathVariable int rollno){
         System.out.println("delete() from controller");

@@ -11,7 +11,7 @@ public interface EmployeeDao {
 
     int save(Employee employee);
     boolean findEmployeById(int rollno);
-    void createTable();
+//    void createTable();
     void batchInsert(List<Employee> employee);
     Employee updateEmp(Employee employee);
     boolean deleteEmp(int rollno);
