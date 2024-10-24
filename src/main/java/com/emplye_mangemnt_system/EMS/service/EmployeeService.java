@@ -8,7 +8,7 @@ import java.util.Map;
 public interface EmployeeService {
 
     public Employee saveEmployee(Employee employee);
-    public boolean findEmployeById(int rollno);
+    public Employee findEmployeById(int rollno);
     public void batchInsert(List<Employee> employees);
     public Employee updateEmp(Employee employee);
     boolean deleteEmp(int rollno);

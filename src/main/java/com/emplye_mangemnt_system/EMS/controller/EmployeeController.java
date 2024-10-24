@@ -1,6 +1,8 @@
 package com.emplye_mangemnt_system.EMS.controller;
+import com.emplye_mangemnt_system.EMS.dto.EmployeeDTO;
 import com.emplye_mangemnt_system.EMS.pojo.Employee;
 import com.emplye_mangemnt_system.EMS.service.EmployeeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,21 +18,27 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+
+    @Autowired
+    ModelMapper modelMapper;
     //creating new employee
     @PostMapping("/create")
-    public ResponseEntity<Employee> creatingEmployee(@RequestBody Employee employee){
-        //check whether the employee is already  present or not before creating
-        if(findEmployeById(employee.getEmpId())){
-            System.out.println("Employee is already exists");
-            return new ResponseEntity<>(employee,HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(employeeService.saveEmployee(employee), HttpStatus.CREATED);
+    public ResponseEntity<EmployeeDTO> creatingEmployee(@RequestBody EmployeeDTO employeeDTO){
+        //check whether the employee is already  present or not before
+
+        Employee employee =modelMapper.map(employeeDTO, Employee.class);
+        employee=employeeService.saveEmployee(employee);
+        employeeDTO  = modelMapper.map(employee, EmployeeDTO.class);
+
+        return new ResponseEntity<>(employeeDTO,HttpStatus.OK);
     }
 
     //find employee using empid
     @GetMapping("/{empid}")
-    public boolean findEmployeById(@PathVariable int empid){
-        return employeeService.findEmployeById(empid);
+    public ResponseEntity<Employee> findEmployeById(@PathVariable int empid){
+
+         employeeService.findEmployeById(empid);
+         return new ResponseEntity<>(employeeService.findEmployeById(empid),HttpStatus.OK);
     }
 
     //inserting batch of files

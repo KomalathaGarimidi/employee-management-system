@@ -10,7 +10,7 @@ public interface EmployeeDao {
 
 
     int save(Employee employee);
-    boolean findEmployeById(int rollno);
+    Employee findEmployeById(int rollno);
 //    void createTable();
     void batchInsert(List<Employee> employee);
     Employee updateEmp(Employee employee);

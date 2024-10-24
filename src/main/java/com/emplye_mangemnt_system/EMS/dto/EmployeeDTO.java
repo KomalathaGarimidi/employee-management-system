@@ -1,18 +1,17 @@
-package com.emplye_mangemnt_system.EMS.pojo;
+package com.emplye_mangemnt_system.EMS.dto;
 
 import com.emplye_mangemnt_system.EMS.utility.LeaveType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Map;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Employee implements Serializable {
+@NoArgsConstructor
+public class EmployeeDTO {
 
     private int empId;
     private String firstname;
@@ -21,11 +20,9 @@ public class Employee implements Serializable {
     private String salary;
     private String address;
     private String mobile;
-    private  Department departmentid;
-    private JobRole jobRoleid;
-    private Managers managerId;
+    private DepartmentDTO departmentid;
+    private JobRoleDTO jobRoleid;
+    private ManagersDTO managerId;
     private LocalDate joinDate;
     private Map<LeaveType, Double> leaveBalance;
-
-
 }
